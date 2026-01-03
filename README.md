@@ -5,7 +5,7 @@ A Claude Code plugin that makes each unit of engineering work easier than the la
 ## Install
 
 ```bash
-/plugin marketplace add https://github.com/EveryInc/every-marketplace
+/plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
 /plugin install compound-engineering
 ```
 
@@ -17,12 +17,24 @@ Plan → Work → Review → Compound → Repeat
 
 | Command | Purpose |
 |---------|---------|
-| `/plan` | Turn feature ideas into detailed GitHub issues |
-| `/work` | Execute plans with worktrees and task tracking |
-| `/review` | Multi-agent code review before merging |
-| `/compound` | Document learnings to make future work easier |
+| `/workflows:plan` | Turn feature ideas into detailed GitHub issues |
+| `/workflows:work` | Execute plans with worktrees and task tracking |
+| `/workflows:review` | Multi-agent code review before merging |
+| `/workflows:compound` | Document learnings to make future work easier |
 
 Each cycle compounds: plans inform future plans, reviews catch more issues, patterns get documented.
+
+## Philosophy
+
+**Each unit of engineering work should make subsequent units easier—not harder.**
+
+Traditional development accumulates technical debt. Every feature adds complexity. The codebase becomes harder to work with over time.
+
+Compounding engineering inverts this:
+- Document patterns as you discover them
+- Codify learnings so they're reusable
+- Keep quality high so future changes are easy
+- Prefer duplication over premature abstraction
 
 ## Learn More
 
