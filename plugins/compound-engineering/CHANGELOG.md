@@ -5,6 +5,23 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-01-07
+
+### Added
+
+- **`/agent-native-audit` command** - Comprehensive agent-native architecture review with scored principles:
+  - Launches 8 parallel sub-agents, one per core principle
+  - Each agent produces a specific score (X/Y format with percentage)
+  - Principles audited: Action Parity, Tools as Primitives, Context Injection, Shared Workspace, CRUD Completeness, UI Integration, Capability Discovery, Prompt-Native Features
+  - Generates summary report with overall score and top 10 recommendations
+  - Supports auditing a single principle via argument (e.g., `/agent-native-audit action parity`)
+
+### Why?
+
+Agent-native architecture requires checking 8 different principles. Running parallel sub-agents for each principle provides comprehensive coverage with specific, actionable scores. The scored format (X/Y with percentage) makes it easy to track progress and prioritize improvements.
+
+---
+
 ## [3.0.2] - 2026-01-06
 
 ### Added
