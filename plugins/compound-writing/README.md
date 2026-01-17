@@ -99,7 +99,7 @@ claude /writing:compound drafts/debug-production/final.md
 | `publishing-optimizer` | Optimize for SEO, social media, newsletters |
 | `every-style-editor` | Review against Every's style guide |
 
-### Skills (7)
+### Skills (8)
 
 | Skill | Purpose |
 |-------|---------|
@@ -109,7 +109,8 @@ claude /writing:compound drafts/debug-production/final.md
 | `pragmatic-writing` | Write like Hunt/Thomas and Joel Spolsky |
 | `dhh-writing` | Write in DHH's direct, opinionated style |
 | `voice-capture` | Extract and encode voice profiles from samples |
-| `every-style-editor` | Every's editorial style guide |
+| `every-style-editor` | Every's mechanical style guide (grammar, punctuation) |
+| `every-essay-guide` | Every's essay craft (worldview, best practices, hed/dek playbook) |
 
 ## Core Systems
 
