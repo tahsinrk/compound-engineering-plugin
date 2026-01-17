@@ -101,17 +101,19 @@ claude /writing:compound drafts/debug-production/final.md
 
 ### Skills (9)
 
-| Skill | Purpose |
-|-------|---------|
-| `writing-orchestration` | Two-agent architecture with strategies and quality gates |
-| `scratchpad` | Real-time feedback tracking for iterative refinement |
-| `context-notes` | Structured handoffs between commands |
-| `pragmatic-writing` | Write like Hunt/Thomas and Joel Spolsky |
-| `dhh-writing` | Write in DHH's direct, opinionated style |
-| `voice-capture` | Extract and encode voice profiles from samples |
-| `every-style-editor` | Every's mechanical style guide (grammar, punctuation) |
-| `every-essay-guide` | Every's essay craft (worldview, best practices, hed/dek playbook) |
-| `source-code-guide` | Every's Source Code series (AI-era building, coining language, technical narratives) |
+| Skill | Type | Purpose |
+|-------|------|---------|
+| `writing-orchestration` | Core | Two-agent architecture with strategies and quality gates |
+| `scratchpad` | Core | Real-time feedback tracking for iterative refinement |
+| `context-notes` | Core | Structured handoffs between commands |
+| `voice-capture` | Core | Extract and encode voice profiles from samples |
+| `pragmatic-writing` | Voice | Write like Hunt/Thomas and Joel Spolsky |
+| `dhh-writing` | Voice | Write in DHH's direct, opinionated style |
+| `every-essay-guide` | Voice | Every essay craft (worldview, best practices, hed/dek) |
+| `source-code-guide` | Voice | Source Code series (AI-era building, coining language) |
+| `every-style-editor` | Editing | Mechanical review tool (grammar, punctuation, compliance) |
+
+**Voice Layering:** Combine multiple voices for a piece. Example: Source Code + DHH directness, or Every essay + pragmatic clarity.
 
 ## Core Systems
 

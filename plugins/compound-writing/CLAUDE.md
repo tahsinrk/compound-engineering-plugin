@@ -49,9 +49,9 @@ See `docs/WRITING-ARCHITECTURE.md` for the complete framework mapping:
 | `voice-capture` | Core | Extract voice from samples |
 | `pragmatic-writing` | Voice | Hunt/Thomas, Spolsky style |
 | `dhh-writing` | Voice | Direct, opinionated style |
-| `every-style-editor` | Style Guide | Mechanical editing (grammar, punctuation) |
-| `every-essay-guide` | Style Guide | Essay craft (worldview, best practices, hed/dek) |
-| `source-code-guide` | Style Guide | Source Code series (AI-era building, coining language) |
+| `every-essay-guide` | Voice | Every essay craft (worldview, best practices, hed/dek) |
+| `source-code-guide` | Voice | Source Code series (AI-era building, coining language) |
+| `every-style-editor` | Editing | Mechanical review (grammar, punctuation, compliance) |
 
 ## Key Concepts
 
@@ -123,13 +123,21 @@ plugins/compound-writing/
 ├── README.md              # User documentation
 ├── agents/                # 7 agents
 ├── commands/              # 6 commands
-├── skills/                # 9 skills
-│   ├── writing-orchestration/
-│   │   ├── SKILL.md
-│   │   └── references/    # Baseline/situational strategies
-│   ├── scratchpad/
-│   ├── context-notes/
-│   └── ...
+├── skills/                # 9 skills (organized by type)
+│   ├── core/              # Orchestration, assessment, memory
+│   │   ├── writing-orchestration/
+│   │   ├── scratchpad/
+│   │   ├── context-notes/
+│   │   └── voice-capture/
+│   ├── voice/             # Voices (can layer multiple)
+│   │   ├── pragmatic-writing/
+│   │   ├── dhh-writing/
+│   │   ├── every-essay-guide/
+│   │   └── source-code-guide/
+│   ├── editing/           # Review tools (for post-draft)
+│   │   └── every-style-editor/
+│   ├── domain/            # "10 Books Expert" (future)
+│   └── format/            # Channel-specific (future)
 └── docs/
     └── WRITING-ARCHITECTURE.md  # Full framework reference
 ```
