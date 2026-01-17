@@ -13,10 +13,10 @@ Create new writing skills with automatic research, pattern matching, and documen
 <skill_input> #$ARGUMENTS </skill_input>
 
 **Usage:**
-- `create voice "kieran-blog" samples/*.md` → Create voice from writing samples
-- `create voice "startup-founder" "direct, data-driven, builds in public"` → Create voice from description
-- `create domain "saas-metrics" "MRR, churn, CAC/LTV"` → Create "10 Books Expert" domain skill
-- `create format "linkedin" ` → Create platform-specific format skill
+- `create voice "kieran-blog" ~/writing/posts/*.md` → Create voice from your writing samples
+- `create voice "founder-voice" "direct, vulnerable, builds in public"` → Create voice from description
+- `create domain "persuasion" "Cialdini, rhetoric, behavioral economics"` → Create writing expertise skill
+- `create format "twitter-thread"` → Create platform-specific writing format
 
 ---
 
@@ -217,15 +217,17 @@ Use this skill when:
 
 | Avoid | Because | Instead |
 |-------|---------|---------|
-| [pattern] | [reason] | [alternative] |
+| "I think that..." | Weakens authority | State directly |
+| Passive voice in openings | Buries the action | Lead with subject + verb |
+| Corporate jargon | Alienates readers | Use plain language |
 
 ## Examples
 
 ### Before (Generic)
-> [Generic version]
+> It is believed by many experts that the implementation of AI tools can potentially lead to significant productivity improvements in various workplace settings.
 
 ### After ([Name] Voice)
-> [Transformed version]
+> AI tools double your output. I've seen it happen—first in my own work, then across our entire team.
 
 ## Integration
 
@@ -246,12 +248,12 @@ Create `skills/domain/[name]/`:
 # SKILL.md
 ---
 name: domain-[name]
-description: Deep expertise in [domain] - the "10 Books Expert" for [topic]
+description: Deep expertise in [domain] - the "10 Books Expert" for writing about [topic]
 ---
 
-# [Domain] Expertise
+# [Domain] Writing Expertise
 
-[One paragraph on what this domain covers and why it matters]
+[One paragraph on what this domain covers and how it improves your writing]
 
 ## When to Use This Skill
 
@@ -266,53 +268,55 @@ Use this skill when writing about:
 
 1. **[Book/Source 1]** by [Author]
    - Key insight: [insight]
-   - Use when: [context]
+   - Use when writing: [context]
 
 2. **[Book/Source 2]** by [Author]
    - Key insight: [insight]
-   - Use when: [context]
+   - Use when writing: [context]
 
 [... 3-5 total]
 
 ### Supporting Works (5 Secondary Sources)
 
-1. **[Source 1]**: [What it adds]
-2. **[Source 2]**: [What it adds]
+1. **[Source 1]**: [What it adds to your writing]
+2. **[Source 2]**: [What it adds to your writing]
 
 [... 3-5 total]
 
-## Key Frameworks
+## Writing Frameworks
 
 ### [Framework 1 Name]
-[Description and how to apply]
+[How to structure arguments using this framework]
 
 ### [Framework 2 Name]
-[Description and how to apply]
+[How to build narratives using this framework]
 
 ## Domain Vocabulary
 
-| Term | Definition | Usage |
-|------|------------|-------|
-| [term] | [definition] | [when to use] |
+| Term | Plain English | Use in Writing |
+|------|---------------|----------------|
+| [jargon] | [simple definition] | "[example sentence]" |
 
-## Reasoning Patterns
+## Reasoning Patterns for Writing
 
-When writing about [domain], apply these thinking patterns:
+When writing about [domain], structure your thinking:
 
-1. **[Pattern 1]**: [How to reason about X]
-2. **[Pattern 2]**: [How to reason about Y]
+1. **[Pattern 1]**: Start with [X], then show [Y]
+2. **[Pattern 2]**: Use [framework] to build the argument
 
-## Common Mistakes
+## Common Writing Mistakes
 
-| Mistake | Why It's Wrong | Correct Approach |
-|---------|----------------|------------------|
-| [mistake] | [reason] | [fix] |
+| Mistake | Why Readers Lose Interest | Better Approach |
+|---------|---------------------------|-----------------|
+| Starting with definitions | Feels like a textbook | Open with a story or stake |
+| Too much jargon | Alienates non-experts | Translate, then use sparingly |
 
-## Example Applications
+## Example Paragraphs
 
 ### Topic: [Example Topic 1]
-**Approach**: [How to apply domain knowledge]
-**Key points**: [What to emphasize]
+**Hook**: [Opening sentence that grabs attention]
+**Structure**: [How to build the argument]
+**Key phrases**: "[memorable line]", "[quotable insight]"
 ```
 
 ### Format Skill Structure
@@ -323,66 +327,99 @@ Create `skills/format/[name]/`:
 # SKILL.md
 ---
 name: format-[name]
-description: Optimize content for [platform] - constraints, templates, and best practices
+description: Write for [platform] - constraints, templates, and hooks that work
 ---
 
-# [Platform] Format
+# Writing for [Platform]
 
-[One paragraph on this platform and its unique requirements]
+[One paragraph on this platform's unique writing requirements]
 
 ## When to Use This Skill
 
 Use when:
-- Adapting content for [platform]
+- Adapting an essay for [platform]
 - Writing native [platform] content
-- Optimizing for [platform] engagement
+- Repurposing long-form into [platform] format
 
-## Platform Constraints
+## Writing Constraints
 
 | Element | Constraint |
 |---------|-----------|
 | Character limit | [X chars] |
 | Optimal length | [range] |
-| Headers | [allowed/not] |
-| Links | [how they work] |
-| Images | [specs] |
-| Hashtags | [best practice] |
+| Paragraph length | [X sentences max] |
+| Links | [how they affect reach] |
+| Formatting | [what's available] |
 
-## Optimal Structure
+## Writing Templates
 
-### Template 1: [Type]
+### Template 1: The Thread Opener
 ```
-[Structure with placeholders]
-```
+[Hook that stops the scroll]
 
-### Template 2: [Type]
-```
-[Structure with placeholders]
+[Promise of value]
+
+[Thread indicator: 🧵 or "A thread:"]
 ```
 
-## Best Practices
+### Template 2: The Single Post
+```
+[Observation or hot take]
 
-1. **[Practice 1]**: [Why and how]
-2. **[Practice 2]**: [Why and how]
+[One supporting point]
 
-## Hooks That Work
+[Call to engage or share]
+```
+
+## Writing Techniques
+
+1. **Front-load value**: Put the insight in the first line
+2. **Write for skimmers**: Each line should work alone
+3. **End with engagement**: Question, challenge, or call to action
+
+## Hooks That Stop the Scroll
 
 | Hook Type | Example |
 |-----------|---------|
-| [type] | "[example]" |
+| Contrarian | "Unpopular opinion: Most productivity advice makes you less productive" |
+| Story start | "Last week I almost quit my job. Here's what happened instead:" |
+| Number hook | "I've written 500 blog posts. These 3 lessons took the longest to learn:" |
+| Bold claim | "AI won't take your job. But someone using AI will." |
 
-## Common Mistakes
+## Common Writing Mistakes
 
 | Mistake | Fix |
 |---------|-----|
-| [mistake] | [solution] |
+| Burying the hook | Move your best line to the top |
+| Too much context | Assume they know nothing, explain everything |
+| Weak endings | End with action, not summary |
 
-## Examples
+## Example: High-Performing Post
 
-### High-Performing [Platform] Post
 ```
-[Actual example with annotations]
+I've shipped code every day for 10 years.
+
+Here's the one habit that changed everything:
+
+I stop coding at 4pm. No exceptions.
+
+Not because I'm lazy. Because the best ideas
+come when I'm NOT at my desk.
+
+Shower thoughts. Walk thoughts. Dinner thoughts.
+
+The code I write at 9am is 10x better because
+of the thinking I did after 4pm yesterday.
+
+Productivity isn't about more hours.
+It's about better hours.
 ```
+
+**Why it works:**
+- Hook with credibility (10 years)
+- Counterintuitive insight (stop at 4pm)
+- Specific details (shower, walk, dinner)
+- Memorable takeaway (better hours, not more)
 ```
 
 ---
