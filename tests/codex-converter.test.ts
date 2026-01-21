@@ -56,13 +56,22 @@ describe("convertClaudeToCodex", () => {
     const parsedPrompt = parseFrontmatter(prompt.content)
     expect(parsedPrompt.data.description).toBe("Planning command")
     expect(parsedPrompt.data["argument-hint"]).toBe("[FOCUS]")
+    expect(parsedPrompt.body).toContain("$workflows-plan")
     expect(parsedPrompt.body).toContain("Plan the work.")
 
     expect(bundle.skillDirs[0]?.name).toBe("existing-skill")
-    expect(bundle.generatedSkills).toHaveLength(1)
+    expect(bundle.generatedSkills).toHaveLength(2)
 
-    const generated = bundle.generatedSkills[0]
-    const parsedSkill = parseFrontmatter(generated.content)
+    const commandSkill = bundle.generatedSkills.find((skill) => skill.name === "workflows-plan")
+    expect(commandSkill).toBeDefined()
+    const parsedCommandSkill = parseFrontmatter(commandSkill!.content)
+    expect(parsedCommandSkill.data.name).toBe("workflows-plan")
+    expect(parsedCommandSkill.data.description).toBe("Planning command")
+    expect(parsedCommandSkill.body).toContain("Allowed tools")
+
+    const agentSkill = bundle.generatedSkills.find((skill) => skill.name === "security-reviewer")
+    expect(agentSkill).toBeDefined()
+    const parsedSkill = parseFrontmatter(agentSkill!.content)
     expect(parsedSkill.data.name).toBe("security-reviewer")
     expect(parsedSkill.data.description).toBe("Security-focused agent")
     expect(parsedSkill.body).toContain("Capabilities")

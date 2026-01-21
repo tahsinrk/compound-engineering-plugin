@@ -1,6 +1,6 @@
 import { formatFrontmatter } from "../utils/frontmatter"
 import type { ClaudeAgent, ClaudeCommand, ClaudePlugin } from "../types/claude"
-import type { CodexBundle, CodexGeneratedSkill, CodexPrompt } from "../types/codex"
+import type { CodexBundle, CodexGeneratedSkill } from "../types/codex"
 import type { ClaudeToOpenCodeOptions } from "./claude-to-opencode"
 
 export type ClaudeToCodexOptions = ClaudeToOpenCodeOptions
@@ -10,15 +10,23 @@ export function convertClaudeToCodex(
   _options: ClaudeToCodexOptions,
 ): CodexBundle {
   const promptNames = new Set<string>()
-  const prompts = plugin.commands.map((command) => convertCommand(command, promptNames))
-
   const skillDirs = plugin.skills.map((skill) => ({
     name: skill.name,
     sourceDir: skill.sourceDir,
   }))
 
-  const existingSkillNames = new Set<string>(skillDirs.map((skill) => normalizeName(skill.name)))
-  const generatedSkills = plugin.agents.map((agent) => convertAgent(agent, existingSkillNames))
+  const usedSkillNames = new Set<string>(skillDirs.map((skill) => normalizeName(skill.name)))
+  const commandSkills: CodexGeneratedSkill[] = []
+  const prompts = plugin.commands.map((command) => {
+    const promptName = uniqueName(normalizeName(command.name), promptNames)
+    const commandSkill = convertCommandSkill(command, usedSkillNames)
+    commandSkills.push(commandSkill)
+    const content = renderPrompt(command, commandSkill.name)
+    return { name: promptName, content }
+  })
+
+  const agentSkills = plugin.agents.map((agent) => convertAgent(agent, usedSkillNames))
+  const generatedSkills = [...commandSkills, ...agentSkills]
 
   return {
     prompts,
@@ -26,16 +34,6 @@ export function convertClaudeToCodex(
     generatedSkills,
     mcpServers: plugin.mcpServers,
   }
-}
-
-function convertCommand(command: ClaudeCommand, usedNames: Set<string>): CodexPrompt {
-  const name = uniqueName(normalizeName(command.name), usedNames)
-  const frontmatter: Record<string, unknown> = {
-    description: command.description,
-    "argument-hint": command.argumentHint,
-  }
-  const content = formatFrontmatter(frontmatter, command.body)
-  return { name, content }
 }
 
 function convertAgent(agent: ClaudeAgent, usedNames: Set<string>): CodexGeneratedSkill {
@@ -54,6 +52,35 @@ function convertAgent(agent: ClaudeAgent, usedNames: Set<string>): CodexGenerate
 
   const content = formatFrontmatter(frontmatter, body)
   return { name, content }
+}
+
+function convertCommandSkill(command: ClaudeCommand, usedNames: Set<string>): CodexGeneratedSkill {
+  const name = uniqueName(normalizeName(command.name), usedNames)
+  const frontmatter: Record<string, unknown> = {
+    name,
+    description: command.description ?? `Converted from Claude command ${command.name}`,
+  }
+  const sections: string[] = []
+  if (command.argumentHint) {
+    sections.push(`## Arguments\n${command.argumentHint}`)
+  }
+  if (command.allowedTools && command.allowedTools.length > 0) {
+    sections.push(`## Allowed tools\n${command.allowedTools.map((tool) => `- ${tool}`).join("\n")}`)
+  }
+  sections.push(command.body.trim())
+  const body = sections.filter(Boolean).join("\n\n").trim()
+  const content = formatFrontmatter(frontmatter, body.length > 0 ? body : command.body)
+  return { name, content }
+}
+
+function renderPrompt(command: ClaudeCommand, skillName: string): string {
+  const frontmatter: Record<string, unknown> = {
+    description: command.description,
+    "argument-hint": command.argumentHint,
+  }
+  const instructions = `Use the $${skillName} skill for this command and follow its instructions.`
+  const body = [instructions, "", command.body].join("\n").trim()
+  return formatFrontmatter(frontmatter, body)
 }
 
 function normalizeName(value: string): string {
