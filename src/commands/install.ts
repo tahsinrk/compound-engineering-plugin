@@ -28,7 +28,7 @@ export default defineCommand({
     output: {
       type: "string",
       alias: "o",
-      default: ".",
+      default: path.join(os.homedir(), ".opencode"),
       description: "Output directory (project root)",
     },
     codexHome: {

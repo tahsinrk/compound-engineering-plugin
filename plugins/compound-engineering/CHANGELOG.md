@@ -5,6 +5,32 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.28.0] - 2026-01-21
+
+### Added
+
+- **`/workflows:brainstorm` command** - Guided ideation flow to expand options quickly (#101)
+
+### Changed
+
+- **`/workflows:plan` command** - Smarter research decision logic before deep dives (#100)
+- **Research checks** - Mandatory API deprecation validation in research flows (#102)
+
+### Merged PRs
+
+- [#102](https://github.com/EveryInc/compound-engineering-plugin/pull/102) feat(research): add mandatory API deprecation validation
+- [#101](https://github.com/EveryInc/compound-engineering-plugin/pull/101) feat: Add /workflows:brainstorm command and skill
+- [#100](https://github.com/EveryInc/compound-engineering-plugin/pull/100) feat(workflows:plan): Add smart research decision logic
+
+### Contributors
+
+Huge thanks to the community contributors who made this release possible! 🙌
+
+- **[@tmchow](https://github.com/tmchow)** - Brainstorm workflow, research decision logic (2 PRs)
+- **[@jaredmorgenstern](https://github.com/jaredmorgenstern)** - API deprecation validation
+
+---
+
 ## [2.27.0] - 2026-01-20
 
 ### Added

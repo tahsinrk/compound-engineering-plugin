@@ -1,10 +1,13 @@
 {
-  "name": "compound-plugin",
+  "name": "@every-env/compound-plugin",
   "version": "0.1.0",
   "type": "module",
-  "private": true,
+  "private": false,
   "bin": {
     "compound-plugin": "./src/index.ts"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "bun run src/index.ts",
