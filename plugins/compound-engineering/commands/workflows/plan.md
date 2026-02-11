@@ -24,10 +24,10 @@ Do not proceed until you have a clear feature description from the user.
 
 **Check for brainstorm output first:**
 
-Before asking questions, look for recent brainstorm documents in `docs/brainstorms/` that match this feature:
+Before asking questions, look for recent brainstorm documents in `brainstorms/` that match this feature:
 
 ```bash
-ls -la docs/brainstorms/*.md 2>/dev/null | head -10
+ls -la brainstorms/*.md 2>/dev/null | head -10
 ```
 
 **Relevance criteria:** A brainstorm is relevant if:
@@ -79,7 +79,7 @@ Run these agents **in parallel** to gather local context:
 
 **What to look for:**
 - **Repo research:** existing patterns, CLAUDE.md guidance, technology familiarity, pattern consistency
-- **Learnings:** documented solutions in `docs/solutions/` that might apply (gotchas, patterns, lessons learned)
+- **Learnings:** documented solutions in `solutions/` that might apply (gotchas, patterns, lessons learned)
 
 These findings inform the next step.
 
@@ -112,8 +112,8 @@ Run these agents in parallel:
 
 After all research steps complete, consolidate findings:
 
-- Document relevant file paths from repo research (e.g., `app/services/example_service.rb:42`)
-- **Include relevant institutional learnings** from `docs/solutions/` (key insights, gotchas to avoid)
+- Document relevant file paths from repo research (e.g., `src/services/example_service.py:42`)
+- **Include relevant institutional learnings** from `solutions/` (key insights, gotchas to avoid)
 - Note external documentation URLs and best practices (if external research was done)
 - List related issues or PRs discovered
 - Capture CLAUDE.md conventions
@@ -433,13 +433,11 @@ Apply best practices for clarity and actionability, making the issue easy to sca
 # Good example with syntax highlighting and line references
 
 
-```ruby
-# app/services/user_service.rb:42
-def process_user(user)
-
-# Implementation here
-
-end
+```python
+# src/services/user_service.py:42
+def process_user(user):
+    # Implementation here
+    pass
 ```
 
 # Collapsible error logs
@@ -477,23 +475,23 @@ end
 **Filename:** Use the date and kebab-case filename from Step 2 Title & Categorization.
 
 ```
-docs/plans/YYYY-MM-DD-<type>-<descriptive-name>-plan.md
+plans/YYYY-MM-DD-<type>-<descriptive-name>-plan.md
 ```
 
 Examples:
-- ✅ `docs/plans/2026-01-15-feat-user-authentication-flow-plan.md`
-- ✅ `docs/plans/2026-02-03-fix-checkout-race-condition-plan.md`
-- ✅ `docs/plans/2026-03-10-refactor-api-client-extraction-plan.md`
-- ❌ `docs/plans/2026-01-15-feat-thing-plan.md` (not descriptive - what "thing"?)
-- ❌ `docs/plans/2026-01-15-feat-new-feature-plan.md` (too vague - what feature?)
-- ❌ `docs/plans/2026-01-15-feat: user auth-plan.md` (invalid characters - colon and space)
-- ❌ `docs/plans/feat-user-auth-plan.md` (missing date prefix)
+- ✅ `plans/2026-01-15-feat-user-authentication-flow-plan.md`
+- ✅ `plans/2026-02-03-fix-checkout-race-condition-plan.md`
+- ✅ `plans/2026-03-10-refactor-api-client-extraction-plan.md`
+- ❌ `plans/2026-01-15-feat-thing-plan.md` (not descriptive - what "thing"?)
+- ❌ `plans/2026-01-15-feat-new-feature-plan.md` (too vague - what feature?)
+- ❌ `plans/2026-01-15-feat: user auth-plan.md` (invalid characters - colon and space)
+- ❌ `plans/feat-user-auth-plan.md` (missing date prefix)
 
 ## Post-Generation Options
 
 After writing the plan file, use the **AskUserQuestion tool** to present these options:
 
-**Question:** "Plan ready at `docs/plans/YYYY-MM-DD-<type>-<name>-plan.md`. What would you like to do next?"
+**Question:** "Plan ready at `plans/YYYY-MM-DD-<type>-<name>-plan.md`. What would you like to do next?"
 
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
@@ -505,12 +503,12 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 7. **Create Issue** - Create issue in project tracker (GitHub/Linear)
 
 Based on selection:
-- **Open plan in editor** → Run `open docs/plans/<plan_filename>.md` to open the file in the user's default editor
+- **Open plan in editor** → Run `open plans/<plan_filename>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
 - **`/technical_review`** → Call the /technical_review command with the plan file path
 - **Review and refine** → Load `document-review` skill.
 - **`/workflows:work`** → Call the /workflows:work command with the plan file path
-- **`/workflows:work` on remote** → Run `/workflows:work docs/plans/<plan_filename>.md &` to start work in background for Claude Code web
+- **`/workflows:work` on remote** → Run `/workflows:work plans/<plan_filename>.md &` to start work in background for Claude Code web
 - **Create Issue** → See "Issue Creation" section below
 - **Other** (automatically provided) → Accept free text for rework or specific changes
 

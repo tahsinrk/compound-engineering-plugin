@@ -5,4 +5,4 @@ argument-hint: "[plan file path or plan content]"
 disable-model-invocation: true
 ---
 
-Have @agent-dhh-rails-reviewer @agent-kieran-rails-reviewer @agent-code-simplicity-reviewer review the technical approach in this plan in parallel.
+Have @agent-kieran-python-reviewer @agent-kieran-typescript-reviewer @agent-code-simplicity-reviewer review the technical approach in this plan in parallel.

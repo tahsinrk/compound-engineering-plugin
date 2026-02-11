@@ -86,4 +86,4 @@ grep -E '^description:' skills/*/SKILL.md
 
 ## Documentation
 
-See `docs/solutions/plugin-versioning-requirements.md` for detailed versioning workflow.
+See `solutions/plugin-versioning-requirements.md` for detailed versioning workflow.

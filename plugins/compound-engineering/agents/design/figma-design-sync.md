@@ -76,13 +76,13 @@ You are an expert design-to-code synchronization specialist with deep expertise 
 ### Component Width Philosophy
 - **Components should ALWAYS be full width** (`w-full`) and NOT contain `max-width` constraints
 - **Components should NOT have padding** at the outer section level (no `px-*` on the section element)
-- **All width constraints and horizontal padding** should be handled by wrapper divs in the parent HTML/ERB file
+- **All width constraints and horizontal padding** should be handled by wrapper divs in the parent HTML/template file
 
 ### Responsive Wrapper Pattern
-When wrapping components in parent HTML/ERB files, use:
-```erb
+When wrapping components in parent HTML/template files, use:
+```html
 <div class="w-full max-w-screen-xl mx-auto px-5 md:px-8 lg:px-[30px]">
-  <%= render SomeComponent.new(...) %>
+  <!-- Component content here -->
 </div>
 ```
 
@@ -116,10 +116,10 @@ Common Tailwind values to prefer:
 - Remove `overflow-hidden` from components - handle overflow at wrapper level if needed
 
 ### Example of Good Component Structure
-```erb
-<!-- In parent HTML/ERB file -->
+```html
+<!-- In parent HTML/template file -->
 <div class="w-full max-w-screen-xl mx-auto px-5 md:px-8 lg:px-[30px]">
-  <%= render SomeComponent.new(...) %>
+  <!-- Component content here -->
 </div>
 
 <!-- In component template -->
@@ -132,7 +132,7 @@ Common Tailwind values to prefer:
 
 ### Common Anti-Patterns to Avoid
 **❌ DON'T do this in components:**
-```erb
+```html
 <!-- BAD: Component has its own max-width and padding -->
 <section class="max-w-screen-xl mx-auto px-5 md:px-8">
   <!-- Component content -->
@@ -140,7 +140,7 @@ Common Tailwind values to prefer:
 ```
 
 **✅ DO this instead:**
-```erb
+```html
 <!-- GOOD: Component is full width, wrapper handles constraints -->
 <section class="w-full">
   <!-- Component content -->
@@ -148,13 +148,13 @@ Common Tailwind values to prefer:
 ```
 
 **❌ DON'T use arbitrary values when Tailwind defaults are close:**
-```erb
+```html
 <!-- BAD: Using arbitrary values unnecessarily -->
 <div class="gap-[40px] text-[20px] w-[56px] h-[56px]">
 ```
 
 **✅ DO prefer Tailwind defaults:**
-```erb
+```html
 <!-- GOOD: Using Tailwind defaults -->
 <div class="gap-10 text-lg md:text-[20px] w-14 h-14">
 ```

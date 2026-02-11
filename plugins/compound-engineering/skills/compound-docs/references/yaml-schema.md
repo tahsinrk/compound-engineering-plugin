@@ -50,16 +50,16 @@ tags: [n-plus-one, eager-loading, performance]
 
 Based on `problem_type`, documentation is filed in:
 
-- **build_error** → `docs/solutions/build-errors/`
-- **test_failure** → `docs/solutions/test-failures/`
-- **runtime_error** → `docs/solutions/runtime-errors/`
-- **performance_issue** → `docs/solutions/performance-issues/`
-- **database_issue** → `docs/solutions/database-issues/`
-- **security_issue** → `docs/solutions/security-issues/`
-- **ui_bug** → `docs/solutions/ui-bugs/`
-- **integration_issue** → `docs/solutions/integration-issues/`
-- **logic_error** → `docs/solutions/logic-errors/`
-- **developer_experience** → `docs/solutions/developer-experience/`
-- **workflow_issue** → `docs/solutions/workflow-issues/`
-- **best_practice** → `docs/solutions/best-practices/`
-- **documentation_gap** → `docs/solutions/documentation-gaps/`
+- **build_error** → `solutions/build-errors/`
+- **test_failure** → `solutions/test-failures/`
+- **runtime_error** → `solutions/runtime-errors/`
+- **performance_issue** → `solutions/performance-issues/`
+- **database_issue** → `solutions/database-issues/`
+- **security_issue** → `solutions/security-issues/`
+- **ui_bug** → `solutions/ui-bugs/`
+- **integration_issue** → `solutions/integration-issues/`
+- **logic_error** → `solutions/logic-errors/`
+- **developer_experience** → `solutions/developer-experience/`
+- **workflow_issue** → `solutions/workflow-issues/`
+- **best_practice** → `solutions/best-practices/`
+- **documentation_gap** → `solutions/documentation-gaps/`

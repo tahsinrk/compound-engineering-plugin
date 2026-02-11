@@ -115,8 +115,8 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    **Commit workflow:**
    ```bash
-   # 1. Verify tests pass (use project's test command)
-   # Examples: bin/rails test, npm test, pytest, go test, etc.
+   # 1. Verify tests pass (use the project's test command)
+   # Examples: npm test, pytest, go test, cargo test, etc.
 
    # 2. Stage only files related to this logical unit (not `git add .`)
    git add <files related to this logical unit>
@@ -166,8 +166,8 @@ This command takes a work document (plan, specification, or todo file) and execu
    Always run before submitting:
 
    ```bash
-   # Run full test suite (use project's test command)
-   # Examples: bin/rails test, npm test, pytest, go test, etc.
+   # Run full test suite (use the project's test command)
+   # Examples: npm test, pytest, go test, cargo test, etc.
 
    # Run linting (per CLAUDE.md)
    # Use linting-agent before pushing to origin
@@ -178,16 +178,15 @@ This command takes a work document (plan, specification, or todo file) and execu
    Use for complex, risky, or large changes:
 
    - **code-simplicity-reviewer**: Check for unnecessary complexity
-   - **kieran-rails-reviewer**: Verify Rails conventions (Rails projects)
+   - **kieran-python-reviewer**: Verify Python conventions (Python projects)
    - **performance-oracle**: Check for performance issues
    - **security-sentinel**: Scan for security vulnerabilities
-   - **cora-test-reviewer**: Review test quality (Rails projects with comprehensive test coverage)
 
    Run reviewers in parallel with Task tool:
 
    ```
    Task(code-simplicity-reviewer): "Review changes for simplicity"
-   Task(kieran-rails-reviewer): "Check Rails conventions"
+   Task(kieran-python-reviewer): "Check Python conventions"
    ```
 
    Present findings to user and address critical issues.
@@ -401,7 +400,7 @@ Before creating PR, verify:
 
 - [ ] All clarifying questions asked and answered
 - [ ] All TodoWrite tasks marked completed
-- [ ] Tests pass (run project's test command)
+- [ ] Tests pass (run the project's test command)
 - [ ] Linting passes (use linting-agent)
 - [ ] Code follows existing patterns
 - [ ] Figma designs match implementation (if applicable)

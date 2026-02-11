@@ -53,10 +53,12 @@ Ensure that the code is ready for analysis (either in worktree or on current bra
 <protected_artifacts>
 The following paths are compound-engineering pipeline artifacts and must never be flagged for deletion, removal, or gitignore by any review agent:
 
-- `docs/plans/*.md` — Plan files created by `/workflows:plan`. These are living documents that track implementation progress (checkboxes are checked off by `/workflows:work`).
-- `docs/solutions/*.md` — Solution documents created during the pipeline.
+- `plans/*.md` — Plan files created by `/workflows:plan`. These are living documents that track implementation progress (checkboxes are checked off by `/workflows:work`).
+- `solutions/*.md` — Solution documents created during the pipeline.
 
 If a review agent flags any file in these directories for cleanup or removal, discard that finding during synthesis. Do not create a todo for it.
+
+Note: When reviewing PRs that modify these protected artifacts (e.g., checking off plan items), verify the changes are legitimate progress tracking rather than accidental modifications.
 </protected_artifacts>
 
 #### Parallel Agents to review the PR:
@@ -65,10 +67,9 @@ If a review agent flags any file in these directories for cleanup or removal, di
 
 Run ALL or most of these agents at the same time:
 
-1. Task kieran-rails-reviewer(PR content)
-2. Task dhh-rails-reviewer(PR title)
-3. If turbo is used: Task rails-turbo-expert(PR content)
-4. Task git-history-analyzer(PR content)
+1. Task kieran-python-reviewer(PR content)
+2. Task kieran-typescript-reviewer(PR title)
+3. Task git-history-analyzer(PR content)
 5. Task dependency-detective(PR content)
 6. Task pattern-recognition-specialist(PR content)
 7. Task architecture-strategist(PR content)
@@ -87,13 +88,13 @@ Run ALL or most of these agents at the same time:
 
 These agents are run ONLY when the PR matches specific criteria. Check the PR files list to determine if they apply:
 
-**If PR contains database migrations (db/migrate/*.rb files) or data backfills:**
+**If PR contains database migrations or data backfills:**
 
 14. Task data-migration-expert(PR content) - Validates ID mappings match production, checks for swapped values, verifies rollback safety
 15. Task deployment-verification-agent(PR content) - Creates Go/No-Go deployment checklist with SQL verification queries
 
 **When to run migration agents:**
-- PR includes files matching `db/migrate/*.rb`
+- PR includes database migration files
 - PR modifies columns that store IDs, enums, or mappings
 - PR includes data backfill scripts or rake tasks
 - PR changes how data is read/written (e.g., changing from FK to string column)
@@ -218,7 +219,7 @@ Remove duplicates, prioritize by severity and impact.
 <synthesis_tasks>
 
 - [ ] Collect findings from all parallel agents
-- [ ] Discard any findings that recommend deleting or gitignoring files in `docs/plans/` or `docs/solutions/` (see Protected Artifacts above)
+- [ ] Discard any findings that recommend deleting or gitignoring files in `plans/` or `solutions/` (see Protected Artifacts above)
 - [ ] Categorize by type: security, performance, architecture, quality, etc.
 - [ ] Assign severity levels: 🔴 CRITICAL (P1), 🟡 IMPORTANT (P2), 🔵 NICE-TO-HAVE (P3)
 - [ ] Remove duplicate or overlapping findings
@@ -379,7 +380,7 @@ After creating all todo files, present comprehensive summary:
 
 ### Review Agents Used:
 
-- kieran-rails-reviewer
+- kieran-python-reviewer
 - security-sentinel
 - performance-oracle
 - architecture-strategist

@@ -10,7 +10,7 @@ Coordinate multiple subagents working in parallel to document a recently solved 
 
 ## Purpose
 
-Captures problem solutions while context is fresh, creating structured documentation in `docs/solutions/` with YAML frontmatter for searchability and future reference. Uses parallel subagents for maximum efficiency.
+Captures problem solutions while context is fresh, creating structured documentation in `solutions/` with YAML frontmatter (including project field) for searchability and future reference. Uses parallel subagents for maximum efficiency.
 
 **Why "compound"?** Each documented solution compounds your team's knowledge. The first time you solve a problem takes research. Document it, and the next occurrence takes minutes. Knowledge compounds.
 
@@ -38,8 +38,9 @@ Launch these subagents IN PARALLEL. Each returns text data to the orchestrator.
 #### 1. **Context Analyzer**
    - Extracts conversation history
    - Identifies problem type, component, symptoms
+   - Determines project name (or 'cross-project' if generally applicable)
    - Validates against schema
-   - Returns: YAML frontmatter skeleton
+   - Returns: YAML frontmatter skeleton (with project field after category)
 
 #### 2. **Solution Extractor**
    - Analyzes all investigation steps
@@ -48,7 +49,7 @@ Launch these subagents IN PARALLEL. Each returns text data to the orchestrator.
    - Returns: Solution content block
 
 #### 3. **Related Docs Finder**
-   - Searches `docs/solutions/` for related documentation
+   - Searches `solutions/` for related documentation
    - Identifies cross-references and links
    - Finds related GitHub issues
    - Returns: Links and relationships
@@ -60,7 +61,7 @@ Launch these subagents IN PARALLEL. Each returns text data to the orchestrator.
    - Returns: Prevention/testing content
 
 #### 5. **Category Classifier**
-   - Determines optimal `docs/solutions/` category
+   - Determines optimal `solutions/` category
    - Validates category against schema
    - Suggests filename based on slug
    - Returns: Final path and filename
@@ -77,9 +78,9 @@ The orchestrating agent (main conversation) performs these steps:
 
 1. Collect all text results from Phase 1 subagents
 2. Assemble complete markdown file from the collected pieces
-3. Validate YAML frontmatter against schema
-4. Create directory if needed: `mkdir -p docs/solutions/[category]/`
-5. Write the SINGLE final file: `docs/solutions/[category]/[filename].md`
+3. Validate YAML frontmatter against schema (ensure project field is present after category)
+4. Create directory if needed: `mkdir -p solutions/[category]/`
+5. Write the SINGLE final file: `solutions/[category]/[filename].md`
 
 </sequential_tasks>
 
@@ -94,8 +95,7 @@ Based on problem type, optionally invoke specialized agents to review the docume
 - **performance_issue** → `performance-oracle`
 - **security_issue** → `security-sentinel`
 - **database_issue** → `data-integrity-guardian`
-- **test_failure** → `cora-test-reviewer`
-- Any code-heavy issue → `kieran-rails-reviewer` + `code-simplicity-reviewer`
+- Any code-heavy issue → `kieran-python-reviewer` + `code-simplicity-reviewer`
 
 </parallel_tasks>
 
@@ -126,7 +126,11 @@ Based on problem type, optionally invoke specialized agents to review the docume
 
 **Organized documentation:**
 
-- File: `docs/solutions/[category]/[filename].md`
+- File: `solutions/[category]/[filename].md`
+- Includes YAML frontmatter with:
+  - `category:` field (the problem category)
+  - `project:` field (the project name this solution was discovered in, or 'cross-project' if generally applicable)
+  - Other metadata fields as defined in schema
 
 **Categories auto-detected from problem:**
 
@@ -146,7 +150,7 @@ Based on problem type, optionally invoke specialized agents to review the docume
 |----------|-----------|
 | Subagents write files like `context-analysis.md`, `solution-draft.md` | Subagents return text data; orchestrator writes one final file |
 | Research and assembly run in parallel | Research completes → then assembly runs |
-| Multiple files created during workflow | Single file: `docs/solutions/[category]/[filename].md` |
+| Multiple files created during workflow | Single file: `solutions/[category]/[filename].md` |
 
 ## Success Output
 
@@ -154,7 +158,7 @@ Based on problem type, optionally invoke specialized agents to review the docume
 ✓ Documentation complete
 
 Subagent Results:
-  ✓ Context Analyzer: Identified performance_issue in brief_system
+  ✓ Context Analyzer: Identified performance_issue, project: my-project
   ✓ Solution Extractor: 3 code fixes
   ✓ Related Docs Finder: 2 related issues
   ✓ Prevention Strategist: Prevention strategies, test suggestions
@@ -162,15 +166,15 @@ Subagent Results:
 
 Specialized Agent Reviews (Auto-Triggered):
   ✓ performance-oracle: Validated query optimization approach
-  ✓ kieran-rails-reviewer: Code examples meet Rails standards
+  ✓ kieran-python-reviewer: Code examples meet Python standards
   ✓ code-simplicity-reviewer: Solution is appropriately minimal
   ✓ every-style-editor: Documentation style verified
 
 File created:
-- docs/solutions/performance-issues/n-plus-one-brief-generation.md
+- solutions/performance-issues/n-plus-one-queries.md
 
 This documentation will be searchable for future reference when similar
-issues occur in the Email Processing or Brief System modules.
+issues occur across projects.
 
 What's next?
 1. Continue workflow (recommended)
@@ -185,7 +189,7 @@ What's next?
 This creates a compounding knowledge system:
 
 1. First time you solve "N+1 query in brief generation" → Research (30 min)
-2. Document the solution → docs/solutions/performance-issues/n-plus-one-briefs.md (5 min)
+2. Document the solution → solutions/performance-issues/n-plus-one-queries.md (5 min)
 3. Next time similar issue occurs → Quick lookup (2 min)
 4. Knowledge compounds → Team gets smarter
 
@@ -214,20 +218,19 @@ Build → Test → Find Issue → Research → Improve → Document → Validate
 Based on problem type, these agents can enhance documentation:
 
 ### Code Quality & Review
-- **kieran-rails-reviewer**: Reviews code examples for Rails best practices
+- **kieran-python-reviewer**: Reviews code examples for Python best practices
 - **code-simplicity-reviewer**: Ensures solution code is minimal and clear
 - **pattern-recognition-specialist**: Identifies anti-patterns or repeating issues
 
 ### Specific Domain Experts
 - **performance-oracle**: Analyzes performance_issue category solutions
 - **security-sentinel**: Reviews security_issue solutions for vulnerabilities
-- **cora-test-reviewer**: Creates test cases for prevention strategies
 - **data-integrity-guardian**: Reviews database_issue migrations and queries
 
 ### Enhancement & Documentation
 - **best-practices-researcher**: Enriches solution with industry best practices
 - **every-style-editor**: Reviews documentation style and clarity
-- **framework-docs-researcher**: Links to Rails/gem documentation references
+- **framework-docs-researcher**: Links to framework/library documentation references
 
 ### When to Invoke
 - **Auto-triggered** (optional): Agents can run post-documentation for enhancement
@@ -235,5 +238,5 @@ Based on problem type, these agents can enhance documentation:
 
 ## Related Commands
 
-- `/research [topic]` - Deep investigation (searches docs/solutions/ for patterns)
+- `/research [topic]` - Deep investigation (searches solutions/ for patterns)
 - `/workflows:plan` - Planning workflow (references documented solutions)
