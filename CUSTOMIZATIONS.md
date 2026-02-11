@@ -48,7 +48,7 @@ Every's plugin stores documentation artifacts under a `docs/` prefix. This fork 
 
 **Scope of this change:** This path replacement was applied across **all 28 modified files** in the plugin. Every agent, command, and skill that referenced `docs/solutions/`, `docs/plans/`, or `docs/brainstorms/` was updated.
 
-**Verification:** After the bulk replacement, `grep -r "docs/solutions\|docs/plans\|docs/brainstorms"` returned zero matches across the entire plugin directory.
+**Verification:** `grep -r "docs/solutions\|docs/plans\|docs/brainstorms" plugins/` returns zero matches across the entire plugin directory.
 
 ---
 
@@ -159,9 +159,23 @@ These agents had Rails-specific content that was adapted to be stack-agnostic or
 
 ---
 
-## Modified Workflow Commands (4 files)
+## Agents with Path-Only Changes (3 files)
 
-These are the four core workflow commands that form the Plan → Work → Review → Compound loop.
+These agents had no Rails-specific content but referenced `docs/solutions/` or `docs/plans/` paths that needed updating:
+
+| Agent file | Change |
+|------------|--------|
+| `agents/research/git-history-analyzer.md` | `docs/solutions/` → `solutions/` |
+| `agents/research/learnings-researcher.md` | `docs/solutions/` → `solutions/` throughout |
+| `agents/review/code-simplicity-reviewer.md` | `docs/solutions/` → `solutions/` |
+
+No logic, framework references, or review criteria were changed in these files.
+
+---
+
+## Modified Workflow Commands (5 files)
+
+These are the five workflow commands. Four form the core Plan → Work → Review → Compound loop; the fifth is brainstorming.
 
 ### 1. `commands/workflows/plan.md`
 
@@ -199,6 +213,13 @@ These are the four core workflow commands that form the Plan → Work → Review
 - Solution doc category examples preserved as-is (they're language-agnostic)
 
 **Why:** The compound command documents solutions. Path changes and the `project:` field addition are the main changes.
+
+### 5. `commands/workflows/brainstorm.md`
+
+**What changed:**
+- `docs/brainstorms/` → `brainstorms/` (path-only)
+
+**Why:** Same path convention change as all other files.
 
 ---
 
@@ -320,10 +341,11 @@ After installation, you'll have access to:
 | Category | Files | Type of change |
 |----------|-------|----------------|
 | Agents (substantive) | 8 | Rails code/patterns → Python/TypeScript/generic |
-| Workflow commands | 4 | Paths, agent references, test commands |
+| Agents (path-only) | 3 | `docs/solutions/` → `solutions/` |
+| Workflow commands | 5 | Paths, agent references, test commands |
 | Other commands | 4 | Paths, agent references |
 | Skills | 7 | Path-only updates |
 | Plugin CLAUDE.md | 1 | Path update |
-| **Total** | **28** | **206 insertions, 202 deletions** |
+| **Total** | **28** | |
 
 No files were added or deleted. All changes were modifications to existing files. The original unmodified versions are preserved on the `every-original` branch.

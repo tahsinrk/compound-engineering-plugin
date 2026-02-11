@@ -172,9 +172,9 @@ Run these commands to get every learning file:
 
 ```bash
 # PRIMARY LOCATION - Project learnings
-find docs/solutions -name "*.md" -type f 2>/dev/null
+find solutions -name "*.md" -type f 2>/dev/null
 
-# If docs/solutions doesn't exist, check alternate locations:
+# If solutions doesn't exist, check alternate locations:
 find .claude/docs -name "*.md" -type f 2>/dev/null
 find ~/.claude/docs -name "*.md" -type f 2>/dev/null
 ```
