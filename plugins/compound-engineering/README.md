@@ -89,6 +89,7 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 |---------|-------------|
 | `/lfg` | Full autonomous engineering workflow |
 | `/slfg` | Full autonomous workflow with swarm mode for parallel execution |
+| `/validate-plan` | Validate plans against reality: user workflow, existing infrastructure, requirement mismatches, unstated assumptions |
 | `/deepen-plan` | Enhance plans with parallel research agents for each section |
 | `/changelog` | Create engaging changelogs for recent merges |
 | `/create-agent-skill` | Create or edit Claude Code skills |

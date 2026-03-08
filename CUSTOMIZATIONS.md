@@ -183,8 +183,9 @@ These are the five workflow commands. Four form the core Plan → Work → Revie
 - All `docs/plans/` paths → `plans/`
 - Rails file structure examples (e.g., `app/models/user.rb`, `app/controllers/`) → Python equivalents (`src/models/user.py`, `src/api/`)
 - `bin/rails test` → "project's test command"
+- Added `/validate-plan` as Option 1 (recommended) in Post-Generation Options, before `/deepen-plan`
 
-**Why:** The plan command generates a plan file and references file paths as examples. Those examples need to match your actual project structure.
+**Why:** The plan command generates a plan file and references file paths as examples. Those examples need to match your actual project structure. The `/validate-plan` addition ensures plans are validated against reality before building — catches wrong interface assumptions, missing write-back paths, unnecessary new infrastructure, and unstated assumptions.
 
 ### 2. `commands/workflows/work.md`
 
@@ -308,6 +309,22 @@ These Rails agents were **not deleted** from the plugin files. They still exist 
 
 ---
 
+## New Commands Added (Not in Upstream)
+
+### `commands/validate-plan.md`
+
+**What it does:** External reality check for plans. Four validation dimensions:
+1. **Requirements-Architecture Cross-Check** — Traces every acceptance criterion to a concrete mechanism in the architecture. Catches contradictions (e.g., "automatically updates" but architecture is read-only).
+2. **User Context Model** — Answers five questions about the user's physical context (device, location, time, app) and writes a "Day in the Life" narrative. Catches wrong interface assumptions.
+3. **Infrastructure Inventory** — For every "build" item, checks if it already exists on the target platform. References project-specific files (OPERATIONS.md, credentials registry, installed tools, dependency map).
+4. **Assumption Audit** — Surfaces unstated assumptions, marks each as verified/unverified, and verifies against docs/code.
+
+**Why it exists:** Plans can pass SpecFlow (technical flow validation) while being fundamentally wrong for the user. In the Handshake system (Mar 2026), a plan passed technical review but assumed the wrong primary interface (Claude Code instead of Slack), designed a read-only agent when the system required writes, and proposed new credentials when existing ones sufficed. All five errors would have been caught by this validation. See `solutions/plan-not-stress-tested-from-user-perspective.md` for the full post-mortem.
+
+**When to run:** After `/workflows:plan`, after any plan revision, before switching from planning to building. Also surfaced as Option 1 in `/workflows:plan` Post-Generation Options.
+
+---
+
 ## Installation on a Fresh Machine
 
 ```bash
@@ -336,16 +353,17 @@ After installation, you'll have access to:
 
 ## Summary of All Changes
 
-**28 files modified** across the plugin. Breakdown:
+**29 files modified, 1 file added** across the plugin. Breakdown:
 
 | Category | Files | Type of change |
 |----------|-------|----------------|
 | Agents (substantive) | 8 | Rails code/patterns → Python/TypeScript/generic |
 | Agents (path-only) | 3 | `docs/solutions/` → `solutions/` |
-| Workflow commands | 5 | Paths, agent references, test commands |
+| Workflow commands | 5 | Paths, agent references, test commands, `/validate-plan` option |
 | Other commands | 4 | Paths, agent references |
+| New commands | 1 | `/validate-plan` (not in upstream) |
 | Skills | 7 | Path-only updates |
 | Plugin CLAUDE.md | 1 | Path update |
-| **Total** | **28** | |
+| **Total** | **29** | |
 
-No files were added or deleted. All changes were modifications to existing files. The original unmodified versions are preserved on the `every-original` branch.
+The original unmodified versions are preserved on the `every-original` branch.

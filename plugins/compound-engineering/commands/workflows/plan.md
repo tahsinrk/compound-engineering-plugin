@@ -494,15 +494,17 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 **Question:** "Plan ready at `plans/YYYY-MM-DD-<type>-<name>-plan.md`. What would you like to do next?"
 
 **Options:**
-1. **Open plan in editor** - Open the plan file for review
-2. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
-3. **Run `/technical_review`** - Technical feedback from code-focused reviewers (DHH, Kieran, Simplicity)
-4. **Review and refine** - Improve the document through structured self-review
-5. **Start `/workflows:work`** - Begin implementing this plan locally
-6. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
-7. **Create Issue** - Create issue in project tracker (GitHub/Linear)
+1. **Run `/validate-plan`** - Validate against reality: user workflow, existing infrastructure, requirement-architecture mismatches, unstated assumptions. **Recommended before building.**
+2. **Open plan in editor** - Open the plan file for review
+3. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
+4. **Run `/technical_review`** - Technical feedback from code-focused reviewers (DHH, Kieran, Simplicity)
+5. **Review and refine** - Improve the document through structured self-review
+6. **Start `/workflows:work`** - Begin implementing this plan locally
+7. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
+8. **Create Issue** - Create issue in project tracker (GitHub/Linear)
 
 Based on selection:
+- **`/validate-plan`** → Call the /validate-plan command with the plan file path. Checks requirements vs architecture, user context, infrastructure inventory, and assumption audit. Re-run after any plan revision.
 - **Open plan in editor** → Run `open plans/<plan_filename>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
 - **`/technical_review`** → Call the /technical_review command with the plan file path

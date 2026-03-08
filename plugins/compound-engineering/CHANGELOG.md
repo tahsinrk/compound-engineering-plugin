@@ -5,6 +5,18 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.33.0] - 2026-03-07
+
+### Added
+
+- **`/validate-plan` command** — External reality check for plans. Four validation dimensions: (1) Requirements-Architecture Cross-Check traces every acceptance criterion to a concrete mechanism, (2) User Context Model writes a "Day in the Life" narrative from the user's actual daily experience, (3) Infrastructure Inventory checks what already exists before proposing new components, (4) Assumption Audit surfaces and verifies unstated assumptions. Run after `/workflows:plan` or after any plan revision.
+
+### Changed
+
+- **`/workflows:plan`** — Added `/validate-plan` as Option 1 (recommended) in Post-Generation Options. Surfaced before `/deepen-plan` since validation should happen before enhancement.
+
+---
+
 ## [2.32.0] - 2026-02-11
 
 ### Added
